@@ -14,7 +14,7 @@ function addleResultList(array, stockURL) {
   for (let i = 0; i < array.length; i++) {
     let currentCompany = array[i];
     let corpItem = document.createElement("a");
-    let corpLink = `${stockURL}/company.html?symbol=${currentCompany.symbol}`;
+    let corpLink = `/company.html?symbol=${currentCompany.symbol}`;
     corpItem.innerText = `${currentCompany.name} (${currentCompany.symbol})`;
     corpItem.classList.add("list-group-item");
     corpItem.setAttribute("href", corpLink);
