@@ -51,7 +51,7 @@ async function getStockHistory() {
     `https://financialmodelingprep.com/api/v3/historical-price-full/${symbol}?serietype=line&apikey=${apiKey}`
   );
   let historyDataArray = await response.json();
-  let historyArray = historyDataArray.historical.sort(function compare(a, b) {
+  let historySortedArray = historyDataArray.historical.sort(function compare(a, b) {
     if (a.date < b.date) {
       return -1;
     }
@@ -60,8 +60,8 @@ async function getStockHistory() {
     }
     return 0;
   });
-  let historyDateArray = historyArray.map((corpObj) => corpObj.date);
-  let historyCloseArray = historyArray.map((corpObj) => corpObj.close);
+  let historyDateArray = historySortedArray.map((corpObj) => corpObj.date);
+  let historyCloseArray = historySortedArray.map((corpObj) => corpObj.close);
   getChart(historyDateArray, historyCloseArray);
   removeLoader();
 }

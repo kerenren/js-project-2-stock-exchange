@@ -11,17 +11,43 @@ function removeLoader() {
   loader.classList.add("d-none");
 }
 
-function appendResult(companyDataArray) {
-  for (let i = 0; i < companyDataArray.length; i++) {
-    let currentCompany = companyDataArray[i];
-    let { name, symbol } = currentCompany;
-    let corpItem = document.createElement("a");
-    let corpLink = `./company.html?symbol=${symbol}`;
-    corpItem.innerText = `${name} (${symbol})`; // Object Destructuring
-    corpItem.classList.add("list-group-item");
-    corpItem.href = corpLink;
-    searchResults.append(corpItem);
+function handleChangesColor(changes, changeEl) {
+  if (changes > 0) {
+    changeEl.style.color = "lightgreen";
+  } else {
+    changeEl.style.color = "red";
   }
+}
+
+function appendResult(companyDataArray) {
+  companyDataArray.map(async function (currentCompany) {
+    let { name, symbol } = currentCompany;
+    let profileJson = `https://financialmodelingprep.com/api/v3/profile/${symbol}?apikey=${apiKey}`;
+    let response = await fetch(profileJson);
+    let companiesProfileData = await response.json();
+    let companies = companiesProfileData[0];
+    let { changes, image } = companies; // Object Destructuring
+    let corpList = document.createElement("div");
+    let corpName = document.createElement("a");
+    let corpIcon = document.createElement("img");
+    let changeEl = document.createElement("span");
+    let corpLink = `./company.html?symbol=${symbol}`;
+    corpIcon.src = image;
+    corpIcon.width = "35";
+    corpIcon.classList.add("border-0");
+    corpName.classList.add("border-0", "mx-3");
+    changeEl.classList.add("border-0", "my-0", "ml-2");
+    corpList.classList.add("list-group-item", "d-flex", "align-items-center");
+    corpName.innerText = `${name}`;
+    corpName.href = corpLink;
+    corpList.innerText = ` (${symbol})`;
+    changeEl.innerText = `(${changes}%)`;
+    handleChangesColor(changes, changeEl);
+    corpList.append(changeEl);
+    corpList.prepend(corpName);
+    corpList.prepend(corpIcon);
+    searchResults.append(corpList);
+  });
 }
 
 function removeResultList() {

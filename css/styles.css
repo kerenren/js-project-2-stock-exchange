@@ -20,12 +20,10 @@ body {
   background: rgba(255, 255, 255, 1);
   opacity: 1;
   padding: 2rem;
-  height: 90vh;
+  height: auto;
+  min-height: 90vh;
   font-family: "Cormorant Garamond", serif;
   font-size: 1.1rem;
-}
-.company.main-card {
-  height: auto;
 }
 
 .loader {
