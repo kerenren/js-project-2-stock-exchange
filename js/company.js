@@ -37,12 +37,13 @@ function handleChangesColor(change) {
 async function getCorpInfo() {
   let response = await fetch(profileJson);
   let dataArray = await response.json();
-  companyNameEl.innerText = dataArray[0].companyName;
-  icon.setAttribute("src", dataArray[0].image);
-  descriptionEl.innerText = dataArray[0].description;
-  priceEl.innerText = dataArray[0].price;
-  changeEl.innerText = `(${dataArray[0].changes}%)`;
-  handleChangesColor(dataArray[0].changes);
+  let { companyName, image, description, price, changes } = dataArray[0]; // Object Destructuring
+  companyNameEl.innerText = companyName;
+  icon.setAttribute("src", image);
+  descriptionEl.innerText = description;
+  priceEl.innerText = price;
+  changeEl.innerText = `(${changes}%)`;
+  handleChangesColor(changes);
 }
 
 async function getStockHistory() {
