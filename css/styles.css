@@ -1,18 +1,31 @@
+body {
+  background: url("../body_bg.jpg") no-repeat center center fixed;
+  background-size: cover;
+}
+
 .page-wrapper {
-  margin-top: 2rem;
+  margin: 2rem 0 2rem 0;
   width: 80%;
   border: 1px solid #ccc;
-  padding: 7px 14px 9px;
+  padding: 9px 14px 9px;
   transition: 0.4s;
-  background: linear-gradient(to right, red, purple);
-  border-radius: 1rem;
+  background: radial-gradient(
+    circle,
+    rgba(238, 174, 202, 1) 0%,
+    rgba(148, 187, 233, 1) 90%
+  );
+  opacity: 0.95;
 }
 .main-card {
-  background: #ffffff;
-  color: white;
+  background: rgba(255, 255, 255, 1);
+  opacity: 1;
   padding: 2rem;
-  border-radius: 1rem;
   height: 90vh;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.1rem;
+}
+.company.main-card {
+  height: auto;
 }
 
 .loader {
@@ -70,4 +83,25 @@
   background: #f1f1f1;
   border: solid white 10px;
   border-radius: 50%;
+  /* opacity: 0.8; */
+}
+
+img.card-img-top {
+  width: fit-content;
+}
+
+h1,
+h5 {
+  font-family: "Abril Fatface", cursive;
+}
+
+h6 {
+  font-family: "Abril Fatface", cursive;
+  /* "Source Code Pro", monospace; */
+}
+
+p {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: 1.3rem;
 }
