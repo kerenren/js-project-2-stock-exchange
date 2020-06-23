@@ -84,6 +84,49 @@ body {
   /* opacity: 0.8; */
 }
 
+@keyframes marquee {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.marquee {
+  width: 100%;
+  opacity: 80%;
+  overflow: hidden;
+  background-color: white;
+  overflow: hidden;
+  max-height: 24px;
+  margin: 0 auto;
+  white-space: nowrap;
+}
+
+.marquee span.tiker-item {
+  display: inline-block;
+  font-size: 20px;
+  position: relative;
+  left: 100%;
+  animation: marquee 1000s linear infinite;
+  animation-delay: 0s;
+  /* width: 40vw; */
+}
+
+.ticker-symbol {
+  margin-left: 1rem;
+}
+
+.ticker-price {
+  margin-right: 1rem;
+}
+
+.marquee:hover span.tiker-item {
+  animation-play-state: paused;
+  cursor: pointer;
+}
+
 img.card-img-top {
   width: fit-content;
 }

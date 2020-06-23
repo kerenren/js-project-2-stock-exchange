@@ -12,13 +12,27 @@
       integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
       crossorigin="anonymous"
     />
-    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Cormorant+Garamond:ital@0;1&family=Source+Code+Pro:wght@400;500&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Cormorant+Garamond:ital@0;1&family=Source+Code+Pro:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="./css/styles.css" />
   </head>
 
-  <bod class="w-100 d-flex justify-content-center">
+  <body
+    class="w-100 d-flex justify-content-center flex-column align-items-center"
+  >
+    <!-- marquee can be presented by the marquee tag, but we're required to use other tag and practice the animation by keyframe -->
+    <div class="marquee">
+      <span class="tiker-item" id="tiker-item">
+        <span class="ticker-symbol"></span>
+        <span class="ticker-price"></span>
+      </span>
+    </div>
     <div class="page-wrapper">
-      <h1 class="title d-flex justify-content-center text-white">Search Nasdaq Stock</h1>
+      <h1 class="title d-flex justify-content-center text-white">
+        Search Nasdaq Stock
+      </h1>
       <div class="main-card">
         <div class="input-group mb-3">
           <input
@@ -50,7 +64,7 @@
         <div class="search-results">
           <ul class="list-group list-group-flush" id="search-results"></ul>
         </div>
-    </div>
+      </div>
     </div>
     <script src="./js/scripts.js"></script>
   </body>

@@ -41,7 +41,7 @@ async function getCorpInfo() {
   companyNameEl.innerText = companyName;
   icon.setAttribute("src", image);
   descriptionEl.innerText = description;
-  priceEl.innerText = price;
+  priceEl.innerText = `Stock Price $${price}`;
   changeEl.innerText = `(${changes}%)`;
   handleChangesColor(changes);
 }
@@ -51,7 +51,10 @@ async function getStockHistory() {
     `https://financialmodelingprep.com/api/v3/historical-price-full/${symbol}?serietype=line&apikey=${apiKey}`
   );
   let historyDataArray = await response.json();
-  let historySortedArray = historyDataArray.historical.sort(function compare(a, b) {
+  let historySortedArray = historyDataArray.historical.sort(function compare(
+    a,
+    b
+  ) {
     if (a.date < b.date) {
       return -1;
     }
