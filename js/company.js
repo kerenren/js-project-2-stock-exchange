@@ -1,22 +1,24 @@
-let urlParama = new URLSearchParams(window.location.search);
-let symbol = urlParama.get("symbol");
-let companyNameEl = document.getElementById("companyName");
+const urlParama = new URLSearchParams(window.location.search);
+const symbol = urlParama.get("symbol");
+const companyNameEl = document.getElementById("companyName");
 console.log(symbol);
-let apiKey = "ed93f3e229380c530b7a0e7663f86b99";
-let profilURL = new URL(
+const apiKey = "ed93f3e229380c530b7a0e7663f86b99";
+const profilURL = new URL(
   `https://financialmodelingprep.com/api/v3/profile/${symbol}`
 );
-let icon = document.getElementById("icon");
-let descriptionEl = document.getElementById("description");
-let priceEl = document.getElementById("price");
-let changeEl = document.getElementById("change");
-let loader = document.querySelector(".loader");
+
+
+const icon = document.getElementById("icon");
+const descriptionEl = document.getElementById("description");
+const priceEl = document.getElementById("price");
+const changeEl = document.getElementById("change");
+const loader = document.querySelector(".loader");
 
 function appendSearchParam(element, key, value) {
   return element.searchParams.append(key, value);
 }
 appendSearchParam(profilURL, "apikey", apiKey);
-let profileJson = profilURL.href;
+const profileJson = profilURL.href;
 
 function addLoader() {
   loader.classList.remove("d-none");
