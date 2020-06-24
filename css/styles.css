@@ -81,19 +81,29 @@ body {
   background: #f1f1f1;
   border: solid white 10px;
   border-radius: 50%;
-  /* opacity: 0.8; */
 }
 
 @keyframes marquee {
   from {
-    transform: translateX(0%);
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
   }
   to {
+    -webkit-transform: translateX(-100%);
     transform: translateX(-100%);
   }
 }
 
-.marquee {
+@keyframes marquee-short {
+  0% {
+    left: 100%;
+  }
+  100% {
+    left: 0;
+  }
+}
+
+.ticker-container {
   width: 100%;
   opacity: 80%;
   overflow: hidden;
@@ -104,14 +114,21 @@ body {
   white-space: nowrap;
 }
 
-.marquee span.tiker-item {
+.marquee {
   display: inline-block;
   font-size: 20px;
   position: relative;
-  left: 100%;
-  animation: marquee 1000s linear infinite;
+  animation: marquee 30s linear infinite;
   animation-delay: 0s;
-  /* width: 40vw; */
+}
+
+.marquee-short {
+  display: inline-block;
+  font-size: 20px;
+  position: relative;
+  will-change: transform;
+  animation: marquee-short 5s linear infinite;
+  animation-play-state: running;
 }
 
 .ticker-symbol {
@@ -122,9 +139,15 @@ body {
   margin-right: 1rem;
 }
 
-.marquee:hover span.tiker-item {
+.ticker-container:hover span.tiker-item {
   animation-play-state: paused;
   cursor: pointer;
+}
+
+.js-loading,
+.js-loading:before,
+.js-loading:after {
+  animation-play-state: paused !important;
 }
 
 img.card-img-top {

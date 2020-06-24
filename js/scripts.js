@@ -1,9 +1,10 @@
-let searchBtn = document.querySelector(".search");
-let searchQuery = document.getElementById("search-query");
-let searchResults = document.getElementById("search-results");
-let loader = document.querySelector(".loader");
-let apiKey = "ed93f3e229380c530b7a0e7663f86b99";
-let tikerItem = document.getElementById("tiker-item");
+const searchBtn = document.querySelector(".search");
+const searchQuery = document.getElementById("search-query");
+const searchResults = document.getElementById("search-results");
+const loader = document.querySelector(".loader");
+const apiKey = "ed93f3e229380c530b7a0e7663f86b99";
+const tikerItem = document.getElementById("tiker-item");
+const fragment = new DocumentFragment();
 let symbolArrayGlobe = [];
 
 function addLoader() {
@@ -22,9 +23,9 @@ function handleNumberColor(number, numberEL) {
 }
 
 async function getSymbol() {
-  let symbolListURL = `https://financialmodelingprep.com/api/v3/stock/list?apikey=${apiKey}`;
-  let response = await fetch(symbolListURL);
-  let symbolistArray = await response.json();
+  const symbolListURL = `https://financialmodelingprep.com/api/v3/stock/list?apikey=${apiKey}`;
+  const response = await fetch(symbolListURL);
+  const symbolistArray = await response.json();
   symbolArray = symbolistArray.map(function (currentCompany) {
     return currentCompany.symbol;
   });
@@ -32,29 +33,35 @@ async function getSymbol() {
 }
 
 function createMarquee(price, symbol) {
-  let priceEl = document.createElement("span");
-  let symbolEl = document.createElement("span");
+  const priceEl = document.createElement("span");
+  const symbolEl = document.createElement("span");
   priceEl.classList.add("ticker-price");
   symbolEl.classList.add("ticker-symbol");
   priceEl.innerText = ` $${price}`;
-  symbolEl.innerText = ` ${symbolArrayGlobe[symbol]}`;
+  symbolEl.innerText = ` ${symbol}`;
   handleNumberColor(price, priceEl);
-  tikerItem.append(symbolEl);
-  tikerItem.append(priceEl);
+  fragment.append(symbolEl);
+  fragment.append(priceEl);
 }
 
 async function getRealtimePrice() {
   await getSymbol();
-  for (symbol in symbolArrayGlobe) {
-    let response = await fetch(
-      `https://financialmodelingprep.com/api/v3/quote-short/${symbolArrayGlobe[symbol]}?apikey=${apiKey}`
+  for (let i = 0; i < 30; i++) {
+    symbol = symbolArrayGlobe[i];
+    const response = await fetch(
+      `https://financialmodelingprep.com/api/v3/quote-short/${symbol}?apikey=${apiKey}`
     );
-    let realtimePriceArray = await response.json();
-    realtimePriceArray.forEach(async function (realtimePriceobj) {
-      let { price } = realtimePriceobj;
+    const realtimePriceArray = await response.json();
+    if (!realtimePriceArray.length) {
+      i++;
+    } else {
+      let { price } = realtimePriceArray[0];
       createMarquee(price, symbol);
-    });
+    }
   }
+  tikerItem.classList.add("marquee");
+  tikerItem.appendChild(fragment);
+  removeLoader();
 }
 
 function getRandomInt(max) {
@@ -63,28 +70,32 @@ function getRandomInt(max) {
 
 async function getOneRealtimePrice() {
   await getSymbol();
-  let randomSymbol = getRandomInt(500);
-  let response = await fetch(
+  const randomSymbol = getRandomInt(300);
+  const response = await fetch(
     `https://financialmodelingprep.com/api/v3/quote-short/${symbolArrayGlobe[randomSymbol]}?apikey=${apiKey}`
   );
-  let realtimePriceArray = await response.json();
+  const realtimePriceArray = await response.json();
   let { price } = realtimePriceArray[0];
-  createMarquee(price, randomSymbol);
+  createMarquee(price, symbolArrayGlobe[randomSymbol]);
+  tikerItem.setAttribute("left", "100%");
+  tikerItem.classList.add("marquee-short");
+  tikerItem.appendChild(fragment);
+  removeLoader();
 }
 
 function appendResult(companyDataArray) {
   companyDataArray.map(async function (currentCompany) {
-    let { name, symbol } = currentCompany;
-    let profileJson = `https://financialmodelingprep.com/api/v3/profile/${symbol}?apikey=${apiKey}`;
-    let response = await fetch(profileJson);
-    let companiesProfileData = await response.json();
-    let companies = companiesProfileData[0];
-    let { changes, image } = companies; // Object Destructuring
-    let corpList = document.createElement("div");
-    let corpName = document.createElement("a");
-    let corpIcon = document.createElement("img");
-    let changeEl = document.createElement("span");
-    let corpLink = `./company.html?symbol=${symbol}`;
+    const { name, symbol } = currentCompany;
+    const profileJson = `https://financialmodelingprep.com/api/v3/profile/${symbol}?apikey=${apiKey}`;
+    const response = await fetch(profileJson);
+    const companiesProfileData = await response.json();
+    const companies = companiesProfileData[0];
+    const { changes, image } = companies; // Object Destructuring
+    const corpList = document.createElement("div");
+    const corpName = document.createElement("a");
+    const corpIcon = document.createElement("img");
+    const changeEl = document.createElement("span");
+    const corpLink = `./company.html?symbol=${symbol}`;
     corpIcon.src = image;
     corpIcon.width = "35";
     corpIcon.classList.add("border-0");
@@ -99,7 +110,9 @@ function appendResult(companyDataArray) {
     corpList.append(changeEl);
     corpList.prepend(corpName);
     corpList.prepend(corpIcon);
-    searchResults.append(corpList);
+    const resultFragment = new DocumentFragment();
+    resultFragment.append(corpList);
+    searchResults.append(resultFragment);
   });
 }
 
@@ -116,14 +129,15 @@ async function searchStock() {
   if (searchResults.childNodes.length) {
     removeResultList();
   }
-  let query = searchQuery.value;
-  let stockURL = `https://financialmodelingprep.com/api/v3/search?query=${query}&limit=10&exchange=NASDAQ&apikey=${apiKey}`;
-  let response = await fetch(stockURL);
-  let companyDataArray = await response.json();
+  const query = searchQuery.value;
+  const stockURL = `https://financialmodelingprep.com/api/v3/search?query=${query}&limit=10&exchange=NASDAQ&apikey=${apiKey}`;
+  const response = await fetch(stockURL);
+  const companyDataArray = await response.json();
   appendResult(companyDataArray);
   removeLoader();
 }
 
+addLoader();
 searchBtn.addEventListener("click", searchStock);
 window.addEventListener("load", getRealtimePrice);
 window.addEventListener("error", getOneRealtimePrice);

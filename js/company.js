@@ -63,8 +63,12 @@ async function getStockHistory() {
     }
     return 0;
   });
-  let historyDateArray = historySortedArray.map((corpObj) => corpObj.date);
-  let historyCloseArray = historySortedArray.map((corpObj) => corpObj.close);
+  let historyDateArray = [];
+  let historyCloseArray = [];
+  historySortedArray.map((corpObj) => {
+    historyDateArray.push(corpObj.date);
+    historyCloseArray.push(corpObj.close);
+  });
   getChart(historyDateArray, historyCloseArray);
   removeLoader();
 }
