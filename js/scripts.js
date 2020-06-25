@@ -3,9 +3,6 @@ const searchQuery = document.getElementById("search-query");
 const searchResults = document.getElementById("search-results");
 const loader = document.querySelector(".loader");
 const apiKey = "ed93f3e229380c530b7a0e7663f86b99";
-const tikerItem = document.getElementById("tiker-item");
-const fragment = new DocumentFragment();
-let symbolArrayGlobe = [];
 
 function addLoader() {
   loader.classList.remove("d-none");
@@ -20,67 +17,6 @@ function handleNumberColor(number, numberEL) {
   } else {
     numberEL.style.color = "red";
   }
-}
-
-async function getSymbol() {
-  const symbolListURL = `https://financialmodelingprep.com/api/v3/stock/list?apikey=${apiKey}`;
-  const response = await fetch(symbolListURL);
-  const symbolistArray = await response.json();
-  symbolArray = symbolistArray.map(function (currentCompany) {
-    return currentCompany.symbol;
-  });
-  return (symbolArrayGlobe = symbolArray);
-}
-
-function createMarquee(price, symbol) {
-  const priceEl = document.createElement("span");
-  const symbolEl = document.createElement("span");
-  priceEl.classList.add("ticker-price");
-  symbolEl.classList.add("ticker-symbol");
-  priceEl.innerText = ` $${price}`;
-  symbolEl.innerText = ` ${symbol}`;
-  handleNumberColor(price, priceEl);
-  fragment.append(symbolEl);
-  fragment.append(priceEl);
-}
-
-async function getRealtimePrice() {
-  await getSymbol();
-  for (let i = 0; i < 30; i++) {
-    symbol = symbolArrayGlobe[i];
-    const response = await fetch(
-      `https://financialmodelingprep.com/api/v3/quote-short/${symbol}?apikey=${apiKey}`
-    );
-    const realtimePriceArray = await response.json();
-    if (!realtimePriceArray.length) {
-      i++;
-    } else {
-      let { price } = realtimePriceArray[0];
-      createMarquee(price, symbol);
-    }
-  }
-  tikerItem.classList.add("marquee");
-  tikerItem.appendChild(fragment);
-  removeLoader();
-}
-
-function getRandomInt(max) {
-  return Math.floor(Math.random() * Math.floor(max));
-}
-
-async function getOneRealtimePrice() {
-  await getSymbol();
-  const randomSymbol = getRandomInt(300);
-  const response = await fetch(
-    `https://financialmodelingprep.com/api/v3/quote-short/${symbolArrayGlobe[randomSymbol]}?apikey=${apiKey}`
-  );
-  const realtimePriceArray = await response.json();
-  let { price } = realtimePriceArray[0];
-  createMarquee(price, symbolArrayGlobe[randomSymbol]);
-  tikerItem.setAttribute("left", "100%");
-  tikerItem.classList.add("marquee-short");
-  tikerItem.appendChild(fragment);
-  removeLoader();
 }
 
 function appendResult(companyDataArray) {
@@ -139,5 +75,5 @@ async function searchStock() {
 
 addLoader();
 searchBtn.addEventListener("click", searchStock);
-window.addEventListener("load", getRealtimePrice);
-window.addEventListener("error", getOneRealtimePrice);
+// window.addEventListener("load", getRealtimePrice);
+// window.addEventListener("error", getOneRealtimePrice);

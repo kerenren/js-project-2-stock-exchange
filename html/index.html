@@ -28,7 +28,7 @@
     class="w-100 d-flex justify-content-center flex-column align-items-center"
   >
     <!-- marquee can be presented by the marquee tag, but we're required to use other tag and practice the animation by keyframe -->
-    <div class="ticker-container">
+    <div class="ticker-container" id="ticker-container">
       <span class="tiker-item" id="tiker-item"> </span>
     </div>
     <div class="page-wrapper">
@@ -68,6 +68,12 @@
         </div>
       </div>
     </div>
+    <script src="../js/marquee.js"></script>
     <script src="../js/scripts.js"></script>
+    <script>
+      const TikerContainer = document.getElementById("ticker-container");
+      const marquee1 = new Marquee(TikerContainer);
+      marquee1.load();
+    </script>
   </body>
 </html>

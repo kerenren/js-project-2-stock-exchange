@@ -7,7 +7,6 @@ const profilURL = new URL(
   `https://financialmodelingprep.com/api/v3/profile/${symbol}`
 );
 
-
 const icon = document.getElementById("icon");
 const descriptionEl = document.getElementById("description");
 const priceEl = document.getElementById("price");
@@ -67,6 +66,7 @@ async function getStockHistory() {
   });
   let historyDateArray = [];
   let historyCloseArray = [];
+  //question: I have updated this lines but i am still not understand what's the points to merging it to one .map() function because by using one .map() function, i am creating 3 more lines.
   historySortedArray.map((corpObj) => {
     historyDateArray.push(corpObj.date);
     historyCloseArray.push(corpObj.close);

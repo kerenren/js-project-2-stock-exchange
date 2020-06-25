@@ -1,5 +1,5 @@
 body {
-  background: url("../body_bg.jpg") no-repeat center center fixed;
+  background: url("../photos/body_bg.jpg") no-repeat center center fixed;
   background-size: cover;
 }
 
@@ -21,7 +21,7 @@ body {
   opacity: 1;
   padding: 2rem;
   height: auto;
-  min-height: 90vh;
+  /* min-height: 90vh; */
   font-family: "Cormorant Garamond", serif;
   font-size: 1.1rem;
 }
