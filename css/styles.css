@@ -21,7 +21,9 @@ body {
   opacity: 1;
   padding: 2rem;
   height: auto;
-  /* min-height: 90vh; */
+  -webkit-box-shadow: 10px 9px 7px 6px rgba(204, 202, 204, 0.49);
+  -moz-box-shadow: 10px 9px 7px 6px rgba(204, 202, 204, 0.49);
+  box-shadow: 10px 9px 7px 6px rgba(204, 202, 204, 0.49);
   font-family: "Cormorant Garamond", serif;
   font-size: 1.1rem;
 }
@@ -38,6 +40,7 @@ body {
   right: 0;
 }
 
+/* question: how to make the animation that while finishing the items, it's not jumped to  */
 @keyframes animate {
   0% {
     transform: rotate(0deg);
@@ -139,7 +142,7 @@ body {
   margin-right: 1rem;
 }
 
-.ticker-container:hover span.tiker-item {
+.ticker-container:hover span.ticker-item {
   animation-play-state: paused;
   cursor: pointer;
 }
@@ -168,4 +171,9 @@ p {
   font-family: "Cormorant Garamond", serif;
   font-style: italic;
   font-size: 1.3rem;
+}
+
+button {
+  border: 1px solid #ced4da !important;
+  box-shadow: none !important;
 }

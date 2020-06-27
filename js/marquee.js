@@ -2,15 +2,20 @@ class Marquee {
   constructor(element) {
     this.element = element;
     this.addClassToEl = element.classList.add("ticker-container");
-    this.addIDToEl = TikerContainer.id = "ticker-container";
-    this.loader = document.querySelector(".loader");
     this.apiKey = "ed93f3e229380c530b7a0e7663f86b99";
-    this.tikerItem = document.getElementById("tiker-item");
+    this.tickerItem = document.createElement("span");
     this.fragment = new DocumentFragment();
     this.symbolArrayGlobe = [];
   }
 
+  addTickerItemEL() {
+    this.tickerItem.id = "ticker-item";
+    this.tickerItem.classList.add("tickerItem");
+    this.element.append(this.tickerItem);
+  }
+
   load() {
+    this.addTickerItemEL();
     if (
       document.readyState === "complete" ||
       document.readyState === "loading"
@@ -19,16 +24,6 @@ class Marquee {
     } else {
       this.getOneRealtimePrice();
     }
-  }
-
-  addLoader() {
-    this.loader.classList.remove("d-none");
-    return this;
-  }
-
-  removeLoader() {
-    this.loader.classList.add("d-none");
-    return this;
   }
 
   handleNumberColor(number, numberEL) {
@@ -40,7 +35,7 @@ class Marquee {
   }
 
   async getSymbol() {
-    const symbolListURL = `https://financialmodelingprep.com/api/v3/stock/list?apikey=${apiKey}`;
+    const symbolListURL = `https://financialmodelingprep.com/api/v3/stock/list?apikey=${this.apiKey}`;
     const symbolResponse = await fetch(symbolListURL);
     const symbolistArray = await symbolResponse.json();
     const symbolArray = symbolistArray.map(function (currentCompany) {
@@ -65,10 +60,11 @@ class Marquee {
 
   async getRealtimePrice() {
     await this.getSymbol();
-    for (let i = 0; i < 50; i++) { //question: how can we getting more than 500 results without waiting a long time in featching? 
+    for (let i = 0; i < 30; i++) {
+      //question: how can we getting more than 500 results without waiting a long time in featching?
       let symbol = this.symbolArrayGlobe[i];
       const PriceResponse = await fetch(
-        `https://financialmodelingprep.com/api/v3/quote-short/${symbol}?apikey=${apiKey}`
+        `https://financialmodelingprep.com/api/v3/quote-short/${symbol}?apikey=${this.apiKey}`
       );
       const realtimePriceArray = await PriceResponse.json();
       if (!realtimePriceArray.length) {
@@ -78,9 +74,8 @@ class Marquee {
         this.createMarquee(price, symbol);
       }
     }
-    this.tikerItem.classList.add("marquee");
-    this.tikerItem.appendChild(this.fragment);
-    this.removeLoader();
+    this.tickerItem.classList.add("marquee");
+    this.tickerItem.appendChild(this.fragment);
     return this;
   }
 
@@ -92,15 +87,14 @@ class Marquee {
     await this.getSymbol();
     const randomSymbol = this.getRandomInt(300);
     const singlePriceResponse = await fetch(
-      `https://financialmodelingprep.com/api/v3/quote-short/${this.symbolArrayGlobe[randomSymbol]}?apikey=${apiKey}`
+      `https://financialmodelingprep.com/api/v3/quote-short/${this.symbolArrayGlobe[randomSymbol]}?apikey=${this.apiKey}`
     );
     const realtimePriceArray = await singlePriceResponse.json();
     let { price } = realtimePriceArray[0];
     this.createMarquee(price, this.symbolArrayGlobe[randomSymbol]);
-    this.tikerItem.setAttribute("left", "100%");
-    this.tikerItem.classList.add("marquee-short");
-    this.tikerItem.appendChild(this.fragment);
-    this.removeLoader();
+    this.tickerItem.setAttribute("left", "100%");
+    this.tickerItem.classList.add("marquee-short");
+    this.tickerItem.appendChild(this.fragment);
     return this;
   }
 }
