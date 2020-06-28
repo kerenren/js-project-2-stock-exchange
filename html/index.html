@@ -28,8 +28,7 @@
     class="w-100 d-flex justify-content-center flex-column align-items-center"
   >
     <!-- marquee can be presented by the marquee tag, but we're required to use other tag and practice the animation by keyframe -->
-    <div class="ticker-container" id="ticker-container">
-    </div>
+    <div class="ticker-container" id="ticker-container"></div>
     <div class="page-wrapper">
       <h1 class="title d-flex justify-content-center text-white">
         Search Nasdaq Stock
@@ -47,10 +46,25 @@
         const marquee1 = new Marquee(
           document.getElementById("ticker-container")
         );
-        marquee1.load();
+        // marquee1.load();
         const form = new SearchForm(document.getElementById("form"));
         const results = new SearchResult(document.getElementById("results"));
         form.onSearch((companies) => results.renderResults(companies));
+
+        function highlightResults(query) {
+          let resultText = document.getElementById("search-results").innerText;
+          console.log(resultText);
+          if (!query) {
+            return;
+          }
+          resultText.replace(
+            new RegExp(query, "gi"),
+            (match) => `<mark> ${match}</mark>`
+          );
+        }
+        results.appendResult(function () {
+          highlightResults(form.query);
+        });
       })();
     </script>
   </body>

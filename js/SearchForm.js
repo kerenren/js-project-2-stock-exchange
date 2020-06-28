@@ -3,13 +3,22 @@ class SearchForm {
     this.element = element;
     this.searchForm = document.getElementById("form");
     this.searchBtn = document.createElement("button");
-    // this.loader = document.querySelector(".loader");
     this.loader = document.createElement("div");
     this.apiKey = "ed93f3e229380c530b7a0e7663f86b99";
     this.companyDataArray = [];
     this.companies = [];
     this.inpuntEl = document.createElement("input");
     this.butnDiv = document.createElement("div");
+    this.addInputField();
+    this.query;
+    this.inpuntEl.addEventListener("input", () => {
+      this.query = this.inpuntEl.value;
+    });
+    // this.highlightSearchQuery;
+    // this.addHighlightSearchQuery = (callbackHighlight) => {
+    //   console.log(this);
+    //   highlightSearchQuery = callbackHighlight;
+    // };
   }
 
   addInputField() {
@@ -55,8 +64,7 @@ class SearchForm {
 
   async searchStock(callback) {
     this.showLoader();
-    const query = this.inpuntEl.value;
-    const stockURL = `https://financialmodelingprep.com/api/v3/search?query=${query}&limit=10&exchange=NASDAQ&apikey=${this.apiKey}`;
+    const stockURL = `https://financialmodelingprep.com/api/v3/search?query=${this.query}&limit=10&exchange=NASDAQ&apikey=${this.apiKey}`;
     const response = await fetch(stockURL);
     this.companyDataArray = await response.json();
     return callback(this.companyDataArray);
@@ -64,7 +72,6 @@ class SearchForm {
 
   async onSearch(callback) {
     this.addloaderEL();
-    this.addInputField();
     this.searchBtn.addEventListener("click", async () => {
       this.searchStock.bind(this);
       await this.searchStock(callback);
