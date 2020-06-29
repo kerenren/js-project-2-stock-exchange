@@ -15,14 +15,21 @@
       crossorigin="anonymous"
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Cormorant+Garamond:ital@0;1&family=Source+Code+Pro:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Source+Serif+Pro:wght@400;700&family=Cormorant+Garamond:ital@0;1&family=Source+Code+Pro:wght@400;500&display=swap"
       rel="stylesheet"
     />
+    <script
+      src="https://kit.fontawesome.com/c91f4d4f4a.js"
+      crossorigin="anonymous"
+    ></script>
     <link rel="stylesheet" href="../css/styles.css" />
     <title>Company Stock Exchange info</title>
   </head>
   <body class="company w-100 d-flex justify-content-center">
     <div class="page-wrapper">
+      <a href="./index.html" class="ml-2 text-white">
+        <i class="fas fa-search-dollar mr-2"></i> Back to Search Nasdaq Stock</a
+      >
       <div class="main-card h-auto">
         <div class="loader mx-auto position-fixed d-none">
           <span></span>
@@ -33,7 +40,7 @@
         <div class="card mb-3 h-100 py-3">
           <img class="mx-auto" id="icon" alt="Card image cap" />
           <div class="card-body">
-            <h5 class="card-title corp-name" id="companyName"></h5>
+            <h5 class="card-title corp-name text-center" id="companyName"></h5>
             <h6
               class="card-subtitle mb-2 text-muted price d-inline-block"
               id="price"

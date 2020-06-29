@@ -7,38 +7,34 @@ class SearchForm {
     this.apiKey = "ed93f3e229380c530b7a0e7663f86b99";
     this.companyDataArray = [];
     this.companies = [];
-    this.inpuntEl = document.createElement("input");
+    this.inputEl = document.createElement("input");
     this.butnDiv = document.createElement("div");
     this.addInputField();
     this.query;
-    this.inpuntEl.addEventListener("input", () => {
-      this.query = this.inpuntEl.value;
+    this.inputEl.addEventListener("input", () => {
+      this.query = this.inputEl.value;
     });
-    // this.highlightSearchQuery;
-    // this.addHighlightSearchQuery = (callbackHighlight) => {
-    //   console.log(this);
-    //   highlightSearchQuery = callbackHighlight;
-    // };
   }
 
   addInputField() {
-    this.inpuntEl.type = "text";
-    this.inpuntEl.placeholder = "Search stock by ticker or company name...";
-    this.inpuntEl.id = "search-query";
-    this.inpuntEl.classList.add("form-control");
+    this.inputEl.type = "text";
+    this.inputEl.placeholder = "Search stock by ticker or company name...";
+    this.inputEl.id = "search-query";
+    this.inputEl.classList.add("form-control");
     this.searchForm.classList.add("input-group", "mb-3");
-    this.inpuntEl.setAttribute(
+    this.inputEl.setAttribute(
       "aria-label",
       "Search stock by ticker or company name"
     );
-    this.inpuntEl.setAttribute("aria-describedby", "button-addon2");
+    this.inputEl.setAttribute("aria-describedby", "button-addon2");
     this.butnDiv.classList.add("input-group-append");
     this.searchBtn.classList.add("btn", "btn-outline-secondary", "search");
     this.searchBtn.type = "button";
     this.searchBtn.id = "button-addon2";
     this.searchBtn.value = "search";
-    this.searchBtn.innerText = "Search";
-    this.searchForm.prepend(this.inpuntEl);
+    this.searchBtn.innerHTML =
+      '<i class="fas fa-search-dollar mr-2"></i>Search';
+    this.searchForm.prepend(this.inputEl);
     this.searchForm.append(this.butnDiv);
     this.searchForm.append(this.searchBtn);
   }

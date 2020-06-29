@@ -9,8 +9,8 @@ class Marquee {
   }
 
   addTickerItemEL() {
-    this.tickerItem.id = "ticker-item";
-    this.tickerItem.classList.add("tickerItem");
+    this.tickerItem.id = "tickerItem";
+    this.tickerItem.classList.add("ticker-item");
     this.element.append(this.tickerItem);
   }
 

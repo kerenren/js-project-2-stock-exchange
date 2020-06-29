@@ -3,7 +3,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Kelei🎯ITC stock exchange project</title>
+    <title>Kelei's 🤑 ITC stock exchange project</title>
     <meta name="description" content="ITC stock exchange project" />
     <meta name="author" content="Kelei Ren" />
     <link
@@ -18,9 +18,13 @@
       crossorigin="anonymous"
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Cormorant+Garamond:ital@0;1&family=Source+Code+Pro:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Source+Serif+Pro:wght@400;700&family=Cormorant+Garamond:ital@0;1&family=Source+Code+Pro:wght@400;500&display=swap"
       rel="stylesheet"
     />
+    <script
+      src="https://kit.fontawesome.com/c91f4d4f4a.js"
+      crossorigin="anonymous"
+    ></script>
     <link rel="stylesheet" href="../css/styles.css" />
   </head>
 
@@ -35,7 +39,7 @@
       </h1>
       <div class="main-card">
         <div id="form"></div>
-        <div id="results"></div>
+        <div id="results" class="results"></div>
       </div>
     </div>
     <script src="../js/marquee.js"></script>
@@ -46,25 +50,10 @@
         const marquee1 = new Marquee(
           document.getElementById("ticker-container")
         );
-        // marquee1.load();
+        marquee1.load();
         const form = new SearchForm(document.getElementById("form"));
         const results = new SearchResult(document.getElementById("results"));
         form.onSearch((companies) => results.renderResults(companies));
-
-        function highlightResults(query) {
-          let resultText = document.getElementById("search-results").innerText;
-          console.log(resultText);
-          if (!query) {
-            return;
-          }
-          resultText.replace(
-            new RegExp(query, "gi"),
-            (match) => `<mark> ${match}</mark>`
-          );
-        }
-        results.appendResult(function () {
-          highlightResults(form.query);
-        });
       })();
     </script>
   </body>
