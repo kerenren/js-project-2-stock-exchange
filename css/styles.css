@@ -164,7 +164,7 @@ body {
   color: #84cdfa;
 }
 
-.results div:hover,
+.results div.list-group-item:hover,
 .company img:hover {
   transform: scale(1.05);
   transition: ease-in-out 0.5s;
@@ -194,7 +194,14 @@ button {
   border: 0.0625rem solid #ced4da !important;
   box-shadow: none !important;
   color: #adbae2 !important;
+  float: right;
 }
+
+button.compare {
+  color: white !important;
+  font-family: "Abril Fatface", cursive;
+}
+
 button i {
   font-size: larger;
   color: #adbae2;
