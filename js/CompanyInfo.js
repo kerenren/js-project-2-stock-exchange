@@ -1,23 +1,123 @@
 class CompanyInfo {
-  constructor(element) {
+  constructor(element, symbol) {
     this.element = element;
-    this.urlParama = new URLSearchParams(window.location.search);
-    this.symbol = this.urlParama.get("symbol");
+    this.symbol = symbol;
     this.apiKey = "ed93f3e229380c530b7a0e7663f86b99";
     this.profilURL = new URL(
       `https://financialmodelingprep.com/api/v3/profile/${this.symbol}`
     );
-    this.icon = document.getElementById("icon");
-    this.descriptionEl = document.getElementById("description");
-    this.priceEl = document.getElementById("price");
-    this.changeEl = document.getElementById("change");
-    this.loader = document.querySelector(".loader");
     this.appendSearchParam(this.profilURL, "apikey", this.apiKey);
     this.profileJson = this.profilURL.href;
+    this.mainCard = document.createElement("div");
+    this.mainCard.classList.add("main-card", "h-auto");
+    this.infoContainer = document.createElement("div");
+    this.infoContainer.classList.add("card", "mb-3", "h-100", "py-3");
+    this.cardBody = document.createElement("div");
+    this.cardBody.className = "card-body";
+    this.backSearch;
+    this.loader;
+    this.corpIcon;
+    this.company;
+    this.descriptionEl;
+    this.priceEl;
+    this.changeEl;
+    this.subEl;
+    this.chartEl = document.createElement("canvas");
+    this.chartEl.id = "myChart";
   }
 
-  appendSearchParam(element, key, value) {
-    return element.searchParams.append(key, value);
+  createMainCorpPage() {
+    this.addBackSearchEL();
+    this.addSubEl();
+    this.addDescriptionEl();
+    this.addPriceEl();
+    this.addChangeEL();
+    this.addCompanyEl();
+    this.addIconEL();
+    this.addloaderEL();
+    this.cardBody.append(
+      this.company,
+      this.priceEl,
+      this.changeEl,
+      this.descriptionEl,
+      this.subEl,
+      this.chartEl
+    );
+    this.infoContainer.append(this.corpIcon, this.cardBody);
+    this.mainCard.append(this.loader, this.infoContainer);
+    this.element.append(this.backSearch, this.mainCard);
+  }
+
+  addBackSearchEL() {
+    this.backSearch = document.createElement("a");
+    this.backSearch.href = "./index.html";
+    this.backSearch.innerText = "Back to Search Nasdaq Stock";
+    const backIcon = document.createElement("i");
+    backIcon.classList.add("fas", "fa-search-dollar", "mr-2");
+    this.backSearch.prepend(backIcon);
+  }
+
+  addSubEl() {
+    this.subEl = document.createElement("p");
+    this.subEl.className = "card-text";
+    const subSmall = document.createElement("small");
+    subSmall.className = "text-muted";
+    subSmall.innerText = "Last updated 3 mins ago";
+    this.subEl.append(subSmall);
+  }
+
+  addDescriptionEl() {
+    this.descriptionEl = document.createElement("p");
+    this.descriptionEl.id = "description";
+    this.descriptionEl.classList.add("card-text", "description");
+  }
+
+  addPriceEl() {
+    this.priceEl = document.createElement("h6");
+    this.priceEl.id = "price";
+    this.priceEl.classList.add(
+      "card-subtitle",
+      "mb-2",
+      "text-muted",
+      "price",
+      "d-inline-block"
+    );
+    // this.priceEl.innerText = "Card subtitle";
+  }
+
+  addChangeEL() {
+    this.changeEl = document.createElement("h6");
+    this.changeEl.id = "change";
+    this.changeEl.classList.add(
+      "card-subtitle",
+      "mb-2",
+      "change",
+      "d-inline-block"
+    );
+    // this.changeEl.innerText = "Card subtitle";
+  }
+
+  addCompanyEl() {
+    this.company = document.createElement("h5");
+    this.company.id = "companyName";
+    this.company.classList.add("card-title", "corp-name", "text-center");
+  }
+
+  addIconEL() {
+    this.corpIcon = document.createElement("img");
+    this.corpIcon.className = "mx-auto";
+    this.corpIcon.id = "icon";
+    this.corpIcon.alt = "Card image cap";
+  }
+
+  addloaderEL() {
+    this.loader = document.createElement("div");
+    this.loader.classList.add("loader", "mx-auto", "position-fixed", "d-none");
+    for (let i = 0; i < 4; i++) {
+      const span = document.createElement("span");
+      this.loader.append(span);
+    }
+    this.mainCard.prepend(this.loader);
   }
 
   addLoader() {
@@ -26,6 +126,10 @@ class CompanyInfo {
 
   removeLoader() {
     this.loader.classList.add("d-none");
+  }
+
+  appendSearchParam(element, key, value) {
+    return element.searchParams.append(key, value);
   }
 
   handleChangesColor(change) {
@@ -40,8 +144,8 @@ class CompanyInfo {
     let response = await fetch(this.profileJson);
     let dataArray = await response.json();
     let { companyName, image, description, price, changes } = dataArray[0]; // Object Destructuring
-    this.element.innerText = companyName;
-    this.icon.setAttribute("src", image);
+    this.company.innerText = companyName;
+    this.corpIcon.setAttribute("src", image);
     this.descriptionEl.innerText = description;
     this.priceEl.innerText = `Stock Price $${price}`;
     this.changeEl.innerText = `(${changes}%)`;
@@ -102,7 +206,9 @@ class CompanyInfo {
       },
     });
   }
+
   load() {
+    this.createMainCorpPage();
     this.addLoader();
     this.getStockHistory();
     this.getCorpInfo();
