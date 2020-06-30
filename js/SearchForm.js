@@ -51,12 +51,10 @@ class SearchForm {
 
   showLoader() {
     this.loader.classList.remove("d-none");
-    return this;
   }
 
   removeLoader() {
     this.loader.classList.add("d-none");
-    return this;
   }
 
   handleEmptyQuery() {

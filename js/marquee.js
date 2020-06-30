@@ -42,7 +42,6 @@ class Marquee {
       return currentCompany.symbol;
     });
     this.symbolArrayGlobe = symbolArray.slice(0, 300);
-    return this;
   }
 
   createMarquee(price, symbol) {
@@ -55,7 +54,6 @@ class Marquee {
     this.handleNumberColor(price, priceEl);
     this.fragment.append(symbolEl);
     this.fragment.append(priceEl);
-    return this;
   }
 
   async getRealtimePrice() {
@@ -76,7 +74,6 @@ class Marquee {
     }
     this.tickerItem.classList.add("marquee");
     this.tickerItem.appendChild(this.fragment);
-    return this;
   }
 
   getRandomInt(max) {
@@ -95,6 +92,5 @@ class Marquee {
     this.tickerItem.setAttribute("left", "100%");
     this.tickerItem.classList.add("marquee-short");
     this.tickerItem.appendChild(this.fragment);
-    return this;
   }
 }
