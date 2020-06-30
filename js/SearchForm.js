@@ -65,7 +65,6 @@ class SearchForm {
     } else {
       this.searchBtn.disabled = false;
     }
-    console.log(this.query);
   }
 
   async searchStock(callback) {

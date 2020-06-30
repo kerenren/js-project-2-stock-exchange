@@ -61,6 +61,14 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-    <script src="../js/company.js"></script>
+    <script src="../js/CompanyInfo.js"></script>
+    <script>
+      (async function () {
+        const companyInfo = new CompanyInfo(
+          document.getElementById("companyName")
+        );
+        await companyInfo.load();
+      })();
+    </script>
   </body>
 </html>
