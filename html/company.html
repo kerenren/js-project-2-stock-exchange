@@ -26,7 +26,7 @@
     <title>Company Stock Exchange info</title>
   </head>
   <body class="company w-100 d-flex justify-content-center">
-    <div class="page-wrapper">
+    <div class="page-wrapper" id="companyInfo">
       <a href="./index.html" class="ml-2 text-white">
         <i class="fas fa-search-dollar mr-2"></i> Back to Search Nasdaq Stock</a
       >
@@ -37,7 +37,9 @@
           <span></span>
           <span></span>
         </div>
-        <div class="card mb-3 h-100 py-3">
+        <div class="card mb-3 h-100 py-3" id="infoContainer">
+          <!-- selfnote no need to add this id -->
+          
           <img class="mx-auto" id="icon" alt="Card image cap" />
           <div class="card-body">
             <h5 class="card-title corp-name text-center" id="companyName"></h5>
@@ -61,6 +63,14 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-    <script src="../js/company.js"></script>
+    <script src="../js/CompanyInfo.js"></script>
+    <script>
+      (async function () {
+        const companyInfo = new CompanyInfo(
+          document.getElementById("companyInfo")
+        );
+        await companyInfo.load();
+      })();
+    </script>
   </body>
 </html>
