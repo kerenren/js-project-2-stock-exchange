@@ -13,6 +13,7 @@ class SearchForm {
     this.query;
     this.inputEl.addEventListener("input", () => {
       this.query = this.inputEl.value;
+      this.handleEmptyQuery();
     });
   }
 
@@ -56,6 +57,15 @@ class SearchForm {
   removeLoader() {
     this.loader.classList.add("d-none");
     return this;
+  }
+
+  handleEmptyQuery() {
+    if (!this.query) {
+      this.searchBtn.disabled = true;
+    } else {
+      this.searchBtn.disabled = false;
+    }
+    console.log(this.query);
   }
 
   async searchStock(callback) {
