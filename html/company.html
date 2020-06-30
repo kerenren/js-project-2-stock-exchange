@@ -26,48 +26,17 @@
     <title>Company Stock Exchange info</title>
   </head>
   <body class="company w-100 d-flex justify-content-center">
-    <div class="page-wrapper" id="companyInfo">
-      <a href="./index.html" class="ml-2 text-white">
-        <i class="fas fa-search-dollar mr-2"></i> Back to Search Nasdaq Stock</a
-      >
-      <div class="main-card h-auto">
-        <div class="loader mx-auto position-fixed d-none">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-        <div class="card mb-3 h-100 py-3" id="infoContainer">
-          <!-- selfnote no need to add this id -->
-          
-          <img class="mx-auto" id="icon" alt="Card image cap" />
-          <div class="card-body">
-            <h5 class="card-title corp-name text-center" id="companyName"></h5>
-            <h6
-              class="card-subtitle mb-2 text-muted price d-inline-block"
-              id="price"
-            >
-              Card subtitle
-            </h6>
-            <h6 class="card-subtitle mb-2 change d-inline-block" id="change">
-              Card subtitle
-            </h6>
-            <p class="card-text description" id="description"></p>
-            <p class="card-text">
-              <small class="text-muted">Last updated 3 mins ago</small>
-            </p>
-            <canvas id="myChart"></canvas>
-          </div>
-        </div>
-      </div>
-    </div>
+    <div class="page-wrapper" id="companyInfo"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script src="../js/CompanyInfo.js"></script>
     <script>
       (async function () {
+        const urlParama = new URLSearchParams(window.location.search);
+        const symbol = urlParama.get("symbol");
         const companyInfo = new CompanyInfo(
-          document.getElementById("companyInfo")
+          document.getElementById("companyInfo"),
+          symbol
         );
         await companyInfo.load();
       })();
