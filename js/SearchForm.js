@@ -1,3 +1,5 @@
+import { searchInInternalServal } from "../js/api.js";
+
 class SearchForm {
   constructor(element) {
     this.element = element;
@@ -65,20 +67,21 @@ class SearchForm {
     }
   }
 
-  async searchStock(callback) {
+  async searchStock(searchTerm) {
     this.showLoader();
-    const stockURL = `https://financialmodelingprep.com/api/v3/search?query=${this.query}&limit=10&exchange=NASDAQ&apikey=${this.apiKey}`;
-    const response = await fetch(stockURL);
-    this.companyDataArray = await response.json();
-    return callback(this.companyDataArray);
+    this.companyDataArray = await searchInInternalServal(searchTerm);
+    this.onSearchDoneCallback(this.companyDataArray);
   }
 
   async onSearch(callback) {
     this.addloaderEL();
     this.searchBtn.addEventListener("click", async () => {
       this.searchStock.bind(this);
-      await this.searchStock(callback);
+      await this.searchStock(this.query);
       this.removeLoader();
     });
+    this.onSearchDoneCallback = callback;
   }
 }
+
+export default SearchForm;

@@ -16,14 +16,8 @@ class Marquee {
 
   load() {
     this.addTickerItemEL();
-    if (
-      document.readyState === "complete" ||
-      document.readyState === "loading"
-    ) {
-      this.getRealtimePrice();
-    } else {
-      this.getOneRealtimePrice();
-    }
+    window.addEventListener("load", this.getRealtimePrice.bind(this));
+    window.addEventListener("error", this.getOneRealtimePrice.bind(this));
   }
 
   handleNumberColor(number, numberEL) {
@@ -94,3 +88,5 @@ class Marquee {
     this.tickerItem.appendChild(this.fragment);
   }
 }
+
+export default Marquee;

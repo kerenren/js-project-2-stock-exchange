@@ -42,19 +42,20 @@
         <div id="results" class="results"></div>
       </div>
     </div>
-    <script src="../js/marquee.js"></script>
-    <script src="../js/SearchResult.js"></script>
-    <script src="../js/SearchForm.js"></script>
-    <script>
-      (async function () {
-        const marquee1 = new Marquee(
-          document.getElementById("ticker-container")
-        );
-        marquee1.load();
-        const form = new SearchForm(document.getElementById("form"));
-        const results = new SearchResult(document.getElementById("results"));
-        form.onSearch((companies) => results.renderResults(companies));
-      })();
+    <script type="module" src="../js/marquee.js"></script>
+    <script type="module" src="../js/SearchResult.js"></script>
+    <script type="module" src="../js/SearchForm.js"></script>
+    <script type="module" src="../js/api.js"></script>
+    <script type="module">
+      import Marquee from "../js/marquee.js";
+      import SearchResult from "../js/SearchResult.js";
+      import SearchForm from "../js/SearchForm.js";
+
+      const marquee1 = new Marquee(document.getElementById("ticker-container"));
+      marquee1.load();
+      const form = new SearchForm(document.getElementById("form"));
+      const results = new SearchResult(document.getElementById("results"));
+      form.onSearch((companies) => results.renderResults(companies));
     </script>
   </body>
 </html>

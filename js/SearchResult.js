@@ -3,8 +3,6 @@ class SearchResult {
     this.element = element;
     this.resultsUl = document.createElement("ul");
     this.corpList;
-    this.resultText = "hey";
-    this.corpAllInfoArr;
     this.inputEl = document.getElementById("search-query");
     this.query;
     this.compareBtn;
@@ -12,8 +10,6 @@ class SearchResult {
       this.query = this.inputEl.value;
     });
   }
-
-  static apiKey = "ed93f3e229380c530b7a0e7663f86b99";
 
   handleNumberColor(number, numberEL) {
     if (number > 0) {
@@ -44,7 +40,7 @@ class SearchResult {
       return;
     } else {
       return targetString.replace(regex, (match) => `<mark> ${match}</mark>`);
-      //self note, without return the value, this function is "undefined" by defaul.
+      //self note, without return the value, this function is "undefined" by default, thus info cannot be passed to other element innerHTML
     }
   }
 
@@ -63,8 +59,8 @@ class SearchResult {
   }
 
   createResultElement(company) {
-    const { name, symbol } = company;
-    const { changes, image } = company.companiesProfileData[0]; // Object Destructuring
+    const { symbol } = company;
+    const { companyName, changes, image } = company.profile; // Object Destructuring
     this.corpList = document.createElement("div");
     const corpName = document.createElement("a");
     const corpIcon = document.createElement("img");
@@ -85,7 +81,7 @@ class SearchResult {
       "d-flex",
       "justify-content-between"
     );
-    corpName.innerHTML = this.highlightSearch(this.query, `${name}`);
+    corpName.innerHTML = this.highlightSearch(this.query, `${companyName}`);
     corpName.href = corpLink;
     symbolEL.innerHTML = this.highlightSearch(this.query, ` (${symbol})`);
     changeEl.innerText = `(${changes}%)`;
@@ -102,16 +98,9 @@ class SearchResult {
   }
 
   async appendResult(companies) {
-    this.corpAllInfoArr = await new Promise((resolve, reject) => {
-      companies.map(async (company) => {
-        const profileJson = `https://financialmodelingprep.com/api/v3/profile/${company.symbol}?apikey=${SearchResult.apiKey}`;
-        const response = await fetch(profileJson);
-        company.companiesProfileData = await response.json();
-        this.createResultElement(company);
-      });
-      resolve(companies);
+    companies.map(async (company) => {
+      this.createResultElement(company);
     });
-    return this.corpAllInfoArr;
   }
 
   renderResults(companies) {
@@ -120,3 +109,5 @@ class SearchResult {
     this.appendResult(companies);
   }
 }
+
+export default SearchResult;

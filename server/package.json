@@ -1,0 +1,24 @@
+{
+  "name": "js-project-2-stock-exchange-kerenren",
+  "version": "1.0.0",
+  "description": "js-project-2-stock-exchange-kerenren created by GitHub Classroom",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/israeltechchallenge/js-project-2-stock-exchange-kerenren.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/israeltechchallenge/js-project-2-stock-exchange-kerenren/issues"
+  },
+  "homepage": "https://github.com/israeltechchallenge/js-project-2-stock-exchange-kerenren#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "node-fetch": "^2.6.0"
+  }
+}
