@@ -230,6 +230,56 @@ It should look like this:
  
 
 
+NodeJS Project 1
+
+to start:
+navigate to server file and run node index.js or nodemon index.js
+______________________________________________________________________________________
+
+Summary
+
+This project is based on JS Project 2
+This project is a self-learning project, meaning you will have to learn the material by yourself, and then implement the features in the milestone.
+
+You can use whatever resource you want for learning. We also provide you with a curated list of videos and links:
+Node.js Tutorial for Beginners: Learn Node in 1 Hour | Mosh
+Node.js rial - Intro to Node.js (Level 1)
+Express.js Tutorial: Build RESTful APIs with Node and Express | Mosh
+MongoDB in Tuto18 Minutes - Intro to MongoDB
+MongoDB Node.js Driver Documentation
+
+All of the videos are provided to you in charcha.xyz, you can ask there questions on top of the youtube videos. You can send the link to your teacher or classmates, to get them to answer your question.
+
+Install Mongodb Locally: Install MongoDB
+Explore Mongodb through a UI: Compass
+
+Milestone 1
+
+Features
+
+Create a server in Express.JS, that has an endpoint /search?query=some_query
+This endpoint should get the query input from the user, and return the list of companies and their data from the stock market api
+Your website should send one request to this server, instead of multiple requests to the stock market api
+You should perform a request from your server, meaning you will need to use a request client in your nodejs server. You can look for that online, or use one of those two libraries: https://www.npmjs.com/package/isomorphic-fetch or https://github.com/axios/axios
+
+Milestone 2
+
+Features
+Create a mongodb connection in your server
+in the search endpoint, you should save the searched query, and it’s results, with the time that search was performed, to a mongodb collection called ‘search’
+
+Milestone 3
+
+Features
+Create an endpoint in your server, that is called /search-history that returns all the items in the ‘search’ collection, sorted by a descending order, by the date they were searched
+Create a new page in your website called ‘search-history.html’, that loads those items and presents the in a list with their dates
+each item should be a link to your main page with the search term as a query string (so the main page will perform a search request on load)
+
+Milestone 4
+
+Features
+Create a new endpoint /search-history/:id with a delete method that deletes the item from the collection
+In your ‘search-history.html’ page, add a delete button next to each item, that calls this endpoint, and deletes the search history item from the database, and then presents a new updated list
 
 
 

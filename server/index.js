@@ -4,6 +4,8 @@ const cors = require("cors");
 
 const app = express();
 const port = 3000;
+const rounter = express.Router();
+
 app.use(cors());
 
 const apiKey = "ed93f3e229380c530b7a0e7663f86b99";
@@ -45,3 +47,5 @@ app.get("/api/search", (req, res) => {
 app.listen(port, () =>
   console.log(`Local Server App is listening at http://localhost:${port}`)
 );
+
+module.exports = rounter;
