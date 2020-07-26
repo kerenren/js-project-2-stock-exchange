@@ -53,7 +53,6 @@ class Marquee {
   async getRealtimePrice() {
     await this.getSymbol();
     for (let i = 0; i < 30; i++) {
-      //question: how can we getting more than 500 results without waiting a long time in featching?
       let symbol = this.symbolArrayGlobe[i];
       const PriceResponse = await fetch(
         `https://financialmodelingprep.com/api/v3/quote-short/${symbol}?apikey=${this.apiKey}`

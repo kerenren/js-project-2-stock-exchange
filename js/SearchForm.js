@@ -3,7 +3,6 @@ import { searchInInternalServal } from "../js/api.js";
 class SearchForm {
   constructor(element) {
     this.element = element;
-    this.searchForm = document.getElementById("form");
     this.searchBtn = document.createElement("button");
     this.loader = document.createElement("div");
     this.apiKey = "ed93f3e229380c530b7a0e7663f86b99";
@@ -24,7 +23,7 @@ class SearchForm {
     this.inputEl.placeholder = "Search stock by ticker or company name...";
     this.inputEl.id = "search-query";
     this.inputEl.classList.add("form-control");
-    this.searchForm.classList.add("input-group", "mb-3");
+    this.element.classList.add("input-group", "mb-3");
     this.inputEl.setAttribute(
       "aria-label",
       "Search stock by ticker or company name"
@@ -37,9 +36,9 @@ class SearchForm {
     this.searchBtn.value = "search";
     this.searchBtn.innerHTML =
       '<i class="fas fa-search-dollar mr-2"></i>Search';
-    this.searchForm.prepend(this.inputEl);
-    this.searchForm.append(this.butnDiv);
-    this.searchForm.append(this.searchBtn);
+    this.element.prepend(this.inputEl);
+    this.element.append(this.butnDiv);
+    this.element.append(this.searchBtn);
   }
 
   addloaderEL() {

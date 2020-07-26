@@ -82,7 +82,6 @@ class CompanyInfo {
       "price",
       "d-inline-block"
     );
-    // this.priceEl.innerText = "Card subtitle";
   }
 
   addChangeEL() {
@@ -94,7 +93,6 @@ class CompanyInfo {
       "change",
       "d-inline-block"
     );
-    // this.changeEl.innerText = "Card subtitle";
   }
 
   addCompanyEl() {
@@ -171,7 +169,7 @@ class CompanyInfo {
     });
     let historyDateArray = [];
     let historyCloseArray = [];
-    //question: I have updated this lines but i am still not understand what's the points to merging it to one .map() function because by using one .map() function, i am creating 3 more lines.
+
     historySortedArray.map((corpObj) => {
       historyDateArray.push(corpObj.date);
       historyCloseArray.push(corpObj.close);
