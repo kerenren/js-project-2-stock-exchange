@@ -6,6 +6,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 const rounter = express.Router();
 
+app.use(express.static("public"));
 app.use(cors());
 
 const apiKey = "ed93f3e229380c530b7a0e7663f86b99";
