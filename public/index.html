@@ -8,7 +8,7 @@
     <meta name="author" content="Kelei Ren" />
     <link
       rel="shortcut icon"
-      href="../photos/favicon.png"
+      href="./photos/favicon.png"
       type="image/x-icon"
     />
     <link
@@ -25,13 +25,12 @@
       src="https://kit.fontawesome.com/c91f4d4f4a.js"
       crossorigin="anonymous"
     ></script>
-    <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="stylesheet" href="./css/styles.css" />
   </head>
 
   <body
     class="w-100 d-flex justify-content-center flex-column align-items-center"
   >
-    <!-- marquee can be presented by the marquee tag, but we're required to use other tag and practice the animation by keyframe -->
     <div class="ticker-container" id="ticker-container"></div>
     <div class="page-wrapper">
       <h1 class="title d-flex justify-content-center text-white">
@@ -42,14 +41,14 @@
         <div id="results" class="results"></div>
       </div>
     </div>
-    <script type="module" src="../js/marquee.js"></script>
-    <script type="module" src="../js/SearchResult.js"></script>
-    <script type="module" src="../js/SearchForm.js"></script>
-    <script type="module" src="../js/api.js"></script>
+    <script type="module" src="./js/marquee.js"></script>
+    <script type="module" src="./js/SearchResult.js"></script>
+    <script type="module" src="./js/SearchForm.js"></script>
+    <script type="module" src="./js/api.js"></script>
     <script type="module">
-      import Marquee from "../js/marquee.js";
-      import SearchResult from "../js/SearchResult.js";
-      import SearchForm from "../js/SearchForm.js";
+      import Marquee from "./js/marquee.js";
+      import SearchResult from "./js/SearchResult.js";
+      import SearchForm from "./js/SearchForm.js";
 
       const marquee1 = new Marquee(document.getElementById("ticker-container"));
       marquee1.load();
